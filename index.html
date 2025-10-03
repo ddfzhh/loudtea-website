@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <!-- Anime.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     :root{
@@ -99,6 +101,231 @@
       color: #f472b6 !important;
     }
     
+    /* Pixel-art style animations - no smooth transitions */
+    .pixel-btn, .pixel-badge, .pixel-card {
+      transition: none !important;
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+    }
+    
+    /* Glitch effect base */
+    .glitch {
+      position: relative;
+    }
+    
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .glitch::before {
+      animation: glitch-1 0.1s infinite;
+      color: #ff0080;
+      z-index: -1;
+    }
+    
+    .glitch::after {
+      animation: glitch-2 0.1s infinite;
+      color: #00ffff;
+      z-index: -2;
+    }
+    
+    @keyframes glitch-1 {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+    }
+    
+    @keyframes glitch-2 {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(2px, 2px); }
+      40% { transform: translate(2px, -2px); }
+      60% { transform: translate(-2px, 2px); }
+      80% { transform: translate(-2px, -2px); }
+    }
+    
+    /* Digital noise effect */
+    .noise {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .noise::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="4" result="noise"/><feColorMatrix type="saturate" values="0"/></filter></defs><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
+      opacity: 0.1;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    /* Hero line styling */
+    .hero-line {
+      display: inline-block;
+    }
+    
+    /* Pixelated glitch effects for platform badges */
+    .glitch-pink {
+      position: relative;
+    }
+    
+    .glitch-pink:hover::before,
+    .glitch-pink:hover::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, transparent 49%, #f472b6 50%, transparent 51%);
+      animation: pixel-glitch 0.3s infinite;
+      z-index: -1;
+    }
+    
+    .glitch-cyan {
+      position: relative;
+    }
+    
+    .glitch-cyan:hover::before,
+    .glitch-cyan:hover::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, transparent 49%, #00ffff 50%, transparent 51%);
+      animation: pixel-glitch 0.3s infinite;
+      z-index: -1;
+    }
+    
+    .glitch-yellow {
+      position: relative;
+    }
+    
+    .glitch-yellow:hover::before,
+    .glitch-yellow:hover::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, transparent 49%, #ffff00 50%, transparent 51%);
+      animation: pixel-glitch 0.3s infinite;
+      z-index: -1;
+    }
+    
+    .glitch-purple {
+      position: relative;
+    }
+    
+    .glitch-purple:hover::before,
+    .glitch-purple:hover::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, transparent 49%, #a855f7 50%, transparent 51%);
+      animation: pixel-glitch 0.3s infinite;
+      z-index: -1;
+    }
+    
+    .glitch-blue {
+      position: relative;
+    }
+    
+    .glitch-blue:hover::before,
+    .glitch-blue:hover::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, transparent 49%, #3b82f6 50%, transparent 51%);
+      animation: pixel-glitch 0.3s infinite;
+      z-index: -1;
+    }
+    
+    .glitch-green {
+      position: relative;
+    }
+    
+    .glitch-green:hover::before,
+    .glitch-green:hover::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, transparent 49%, #22c55e 50%, transparent 51%);
+      animation: pixel-glitch 0.3s infinite;
+      z-index: -1;
+    }
+    
+    @keyframes pixel-glitch {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0; }
+      10% { transform: translate(-1px, -1px) scale(1.02); opacity: 0.8; }
+      20% { transform: translate(1px, -1px) scale(1.02); opacity: 0.6; }
+      30% { transform: translate(-1px, 1px) scale(1.02); opacity: 0.8; }
+      40% { transform: translate(1px, 1px) scale(1.02); opacity: 0.6; }
+      50% { transform: translate(0, 0) scale(1.04); opacity: 1; }
+      60% { transform: translate(-1px, 0) scale(1.02); opacity: 0.8; }
+      70% { transform: translate(1px, 0) scale(1.02); opacity: 0.6; }
+      80% { transform: translate(0, -1px) scale(1.02); opacity: 0.8; }
+      90% { transform: translate(0, 1px) scale(1.02); opacity: 0.6; }
+    }
+    
+    /* Pixelated hover states for platform badges */
+    .pixel-badge {
+      transition: none !important;
+      cursor: pointer;
+      position: relative;
+    }
+    
+    /* Pixelated hover effect */
+    .pixel-badge:hover {
+      transform: scale(1.1) !important;
+      filter: contrast(1.2) brightness(1.1);
+      animation: pixel-shake 0.1s infinite;
+    }
+    
+    @keyframes pixel-shake {
+      0%, 100% { transform: scale(1.1) translate(0, 0); }
+      25% { transform: scale(1.1) translate(-1px, 1px); }
+      50% { transform: scale(1.1) translate(1px, -1px); }
+      75% { transform: scale(1.1) translate(-1px, -1px); }
+    }
+    
+    /* Smooth scrolling for better animation experience */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Ensure animations don't interfere with existing styles */
+    .will-reveal {
+      opacity: 1 !important; /* Override for Anime.js controlled elements */
+      transform: none !important;
+    }
+
     /* Mobile responsive improvements */
     @media (max-width: 768px) {
       .hero { padding: 60px 0 40px; }
@@ -237,7 +464,13 @@
     <section id="hero" class="hero">
       <div class="container grid cols-2">
         <div>
-          <h1 class="font-pixel chromatic-aberration" id="heroTag" data-text="BUILDING THE ENTERTAINMENT FRANCHISE FOR THE NEXT 10 YEARS">BUILDING THE<br>ENTERTAINMENT<br>FRANCHISE FOR<br>THE NEXT 10<br>YEARS</h1>
+          <h1 class="font-pixel chromatic-aberration" id="heroTag" data-text="BUILDING THE ENTERTAINMENT FRANCHISE FOR THE NEXT 10 YEARS">
+            <span class="hero-line">BUILDING THE</span><br>
+            <span class="hero-line">ENTERTAINMENT</span><br>
+            <span class="hero-line">FRANCHISE FOR</span><br>
+            <span class="hero-line">THE NEXT 10</span><br>
+            <span class="hero-line">YEARS</span>
+          </h1>
           <p class="muted chromatic-aberration" style="margin-top:16px; font-size:1.1rem;" data-text="Time to lock in.">Time to lock in.</p>
         </div>
         <div>
@@ -276,17 +509,17 @@
       <div class="container">
         <div style="text-align:center;">
           <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:8px;">
-            <span class="pixel-badge">Tiktok</span>
-            <span class="pixel-badge">Social media</span>
-            <span class="pixel-badge">AI live stream</span>
-            <span class="pixel-badge">Viral content</span>
-            <span class="pixel-badge">Instagram</span>
+            <span class="pixel-badge glitch-pink">Tiktok</span>
+            <span class="pixel-badge glitch-cyan">Social media</span>
+            <span class="pixel-badge glitch-yellow">AI live stream</span>
+            <span class="pixel-badge glitch-purple">Viral content</span>
+            <span class="pixel-badge glitch-blue">Instagram</span>
           </div>
           <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
-            <span class="pixel-badge">Threads</span>
-            <span class="pixel-badge">IP</span>
-            <span class="pixel-badge">Clip-farming</span>
-            <span class="pixel-badge">Shorts</span>
+            <span class="pixel-badge glitch-green">Threads</span>
+            <span class="pixel-badge glitch-pink">IP</span>
+            <span class="pixel-badge glitch-cyan">Clip-farming</span>
+            <span class="pixel-badge glitch-yellow">Shorts</span>
           </div>
         </div>
       </div>
@@ -314,7 +547,7 @@
   </footer>
 
   <!-- Easter egg hint -->
-  <div class="egg-hint"><button class="pixel-btn white" id="eggBtn" title="Press ↑↑↓↓←→←→BA">🎉 Click to party!!!</button></div>
+  <div class="egg-hint"><button class="pixel-btn white font-pixel" id="eggBtn" title="Press ↑↑↓↓←→←→BA" style="padding: 0.4rem 0.6rem; font-size: 0.7rem;">🎉 Party!</button></div>
 
 
   <script>
@@ -322,6 +555,509 @@
     'use strict';
     const $ = (sel, root=document) => root.querySelector(sel);
     const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+    // Pixel-art style animations with glitch effects
+    function initAnimations() {
+      // Hero glitch animation - pixelated reveal
+      const heroLines = $$('#heroTag .hero-line');
+      if (heroLines.length > 0) {
+        // Set initial state
+        heroLines.forEach(line => {
+          line.style.opacity = '0';
+          line.style.transform = 'translateY(8px) scale(0.95)';
+          line.style.filter = 'blur(2px)';
+        });
+
+        // Pixelated reveal animation
+        heroLines.forEach((line, index) => {
+          setTimeout(() => {
+            // Quick glitch effect before reveal
+            anime({
+              targets: line,
+              translateX: [0, -2, 2, 0],
+              duration: 100,
+              easing: 'linear',
+              complete: () => {
+                // Main reveal with pixelated scaling
+                anime({
+                  targets: line,
+                  opacity: [0, 1],
+                  translateY: [8, 0],
+                  scale: [0.95, 1],
+                  filter: ['blur(2px)', 'blur(0px)'],
+                  duration: 200,
+                  easing: 'linear'
+                });
+              }
+            });
+          }, 100 + (index * 150)); // Fast staggered timing - under 1 second
+        });
+
+        // Countdown card pixelated pop-in
+        setTimeout(() => {
+          const countdownCard = $('.pixel-card.will-reveal');
+          if (countdownCard) {
+            countdownCard.style.opacity = '0';
+            countdownCard.style.transform = 'scale(0.8) translateY(16px)';
+            
+            anime({
+              targets: countdownCard,
+              opacity: [0, 1],
+              scale: [0.8, 1.05, 1],
+              translateY: [16, -4, 0],
+              duration: 400,
+              easing: 'linear'
+            });
+          }
+        }, 3000);
+      }
+
+      // Platform badges pixelated entrance
+      const badges = $$('.pixel-badge');
+      if (badges.length > 0) {
+        badges.forEach(badge => {
+          badge.style.opacity = '0';
+          badge.style.transform = 'translateY(16px) scale(0.9)';
+          badge.style.filter = 'blur(1px)';
+        });
+
+        badges.forEach((badge, index) => {
+          setTimeout(() => {
+            // Glitch before entrance
+            anime({
+              targets: badge,
+              translateX: [0, -1, 1, 0],
+              duration: 80,
+              easing: 'linear',
+              complete: () => {
+                // Pixelated entrance
+                anime({
+                  targets: badge,
+                  opacity: [0, 1],
+                  translateY: [16, 0],
+                  scale: [0.9, 1.1, 1],
+                  filter: ['blur(1px)', 'blur(0px)'],
+                  duration: 300,
+                  easing: 'linear'
+                });
+              }
+            });
+          }, 600 + (index * 80)); // Start with hero section
+        });
+      }
+
+      // Floating flowers - jittery movement
+      const flowers = $$('.deco');
+      if (flowers.length > 0) {
+        flowers.forEach((flower, index) => {
+          // Remove smooth CSS animation
+          flower.style.animation = 'none';
+          
+          // Add jittery movement
+          setInterval(() => {
+            const randomX = (Math.random() - 0.5) * 4;
+            const randomY = (Math.random() - 0.5) * 4;
+            const randomRotate = (Math.random() - 0.5) * 10;
+            
+            flower.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+          }, 200 + (index * 50));
+        });
+      }
+
+      // Dog image continuous jitter
+      const dogImage = $('#contact img');
+      if (dogImage) {
+        setInterval(() => {
+          const randomX = (Math.random() - 0.5) * 3;
+          const randomY = (Math.random() - 0.5) * 3;
+          const randomRotate = (Math.random() - 0.5) * 2;
+          
+          dogImage.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+        }, 300);
+
+        // Enhanced jitter on hover
+        dogImage.addEventListener('mouseenter', () => {
+          const hoverInterval = setInterval(() => {
+            const randomX = (Math.random() - 0.5) * 8;
+            const randomY = (Math.random() - 0.5) * 8;
+            const randomRotate = (Math.random() - 0.5) * 5;
+            
+            dogImage.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+          }, 100);
+
+          dogImage.addEventListener('mouseleave', () => {
+            clearInterval(hoverInterval);
+          }, { once: true });
+        });
+      }
+
+      // Countdown jitter
+      const countdownCards = $$('#countdown .pixel-card');
+      if (countdownCards.length > 0) {
+        countdownCards.forEach((card, index) => {
+          setInterval(() => {
+            const randomX = (Math.random() - 0.5) * 2;
+            const randomY = (Math.random() - 0.5) * 2;
+            
+            card.style.transform = `translate(${randomX}px, ${randomY}px)`;
+          }, 250 + (index * 30));
+        });
+      }
+
+      // Loud Tea Studio title jitter and color switching
+      const logoText = $('.nav span.font-pixel');
+      if (logoText) {
+        const colors = [
+          '#f472b6', // Pink
+          '#00ffff', // Cyan
+          '#ffff00', // Yellow
+          '#a855f7', // Purple
+          '#3b82f6', // Blue
+          '#22c55e', // Green
+          '#ff0080', // Magenta
+          '#00ff00', // Lime
+          '#ff8000', // Orange
+          '#ff00ff'  // Fuchsia
+        ];
+
+        let colorIndex = 0;
+
+        // Jitter effect
+        setInterval(() => {
+          const randomX = (Math.random() - 0.5) * 4;
+          const randomY = (Math.random() - 0.5) * 4;
+          const randomRotate = (Math.random() - 0.5) * 3;
+          
+          logoText.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+        }, 200);
+
+        // Color switching effect
+        setInterval(() => {
+          colorIndex = (colorIndex + 1) % colors.length;
+          logoText.style.color = colors[colorIndex];
+        }, 400);
+
+        // Enhanced jitter on hover
+        logoText.addEventListener('mouseenter', () => {
+          const hoverInterval = setInterval(() => {
+            const randomX = (Math.random() - 0.5) * 8;
+            const randomY = (Math.random() - 0.5) * 8;
+            const randomRotate = (Math.random() - 0.5) * 6;
+            
+            logoText.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+          }, 100);
+
+          logoText.addEventListener('mouseleave', () => {
+            clearInterval(hoverInterval);
+          }, { once: true });
+        });
+      }
+
+      // Scroll-triggered glitch animations
+      const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+      };
+
+      const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+            
+            // Contact section glitch animation
+            if (target.id === 'contact') {
+              const contactBtn = $('#contact .pixel-btn');
+              const contactImg = $('#contact img');
+              
+              if (contactBtn) {
+                contactBtn.style.opacity = '0';
+                contactBtn.style.transform = 'scale(0.8) translateY(12px)';
+                
+                setTimeout(() => {
+                  anime({
+                    targets: contactBtn,
+                    opacity: [0, 1],
+                    scale: [0.8, 1.1, 1],
+                    translateY: [12, -2, 0],
+                    duration: 300,
+                    easing: 'linear'
+                  });
+                }, 100);
+              }
+
+              if (contactImg) {
+                contactImg.style.opacity = '0';
+                contactImg.style.transform = 'translateY(20px) scale(0.95)';
+                
+                setTimeout(() => {
+                  anime({
+                    targets: contactImg,
+                    opacity: [0, 1],
+                    translateY: [20, 0],
+                    scale: [0.95, 1.02, 1],
+                    duration: 400,
+                    easing: 'linear'
+                  });
+                }, 200);
+              }
+            }
+
+            scrollObserver.unobserve(target);
+          }
+        });
+      }, observerOptions);
+
+      // Observe contact section
+      const contactSection = $('#contact');
+      if (contactSection) {
+        scrollObserver.observe(contactSection);
+      }
+    }
+
+    // Glitchy interactive effects
+    function initInteractiveEffects() {
+      // Pixel button glitch effects
+      const buttons = $$('.pixel-btn');
+      buttons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+          // Enhanced glitch jitter for "Get in touch" button
+          if (button.id === 'contactButton') {
+            // More intense jitter for contact button
+            const jitterInterval = setInterval(() => {
+              const randomX = (Math.random() - 0.5) * 6;
+              const randomY = (Math.random() - 0.5) * 6;
+              const randomRotate = (Math.random() - 0.5) * 8;
+              
+              button.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg) scale(1.1)`;
+            }, 80);
+
+            button.addEventListener('mouseleave', () => {
+              clearInterval(jitterInterval);
+              anime({
+                targets: button,
+                scale: 1,
+                duration: 150,
+                easing: 'linear'
+              });
+            }, { once: true });
+          } else {
+            // Regular glitch for other buttons
+            anime({
+              targets: button,
+              translateX: [0, -2, 2, -1, 1, 0],
+              translateY: [0, -1, 1, 0],
+              duration: 200,
+              easing: 'linear',
+              complete: () => {
+                anime({
+                  targets: button,
+                  scale: 1.1,
+                  duration: 150,
+                  easing: 'linear'
+                });
+              }
+            });
+          }
+        });
+
+        if (button.id !== 'contactButton') {
+          button.addEventListener('mouseleave', () => {
+            anime({
+              targets: button,
+              scale: 1,
+              duration: 150,
+              easing: 'linear'
+            });
+          });
+        }
+      });
+
+      // Platform badge intense jitter on hover
+      const badges = $$('.pixel-badge');
+      badges.forEach(badge => {
+        badge.addEventListener('mouseenter', () => {
+          const jitterInterval = setInterval(() => {
+            const randomX = (Math.random() - 0.5) * 8;
+            const randomY = (Math.random() - 0.5) * 8;
+            const randomRotate = (Math.random() - 0.5) * 10;
+            
+            badge.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg) scale(1.1)`;
+          }, 80);
+
+          badge.addEventListener('mouseleave', () => {
+            clearInterval(jitterInterval);
+            badge.style.transform = 'scale(1)';
+          }, { once: true });
+        });
+      });
+
+      // Hero title intense jitter on hover
+      const heroTitle = $('#heroTag');
+      if (heroTitle) {
+        heroTitle.addEventListener('mouseenter', () => {
+          const jitterInterval = setInterval(() => {
+            const randomX = (Math.random() - 0.5) * 6;
+            const randomY = (Math.random() - 0.5) * 6;
+            const randomRotate = (Math.random() - 0.5) * 8;
+            
+            heroTitle.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+          }, 80);
+
+          heroTitle.addEventListener('mouseleave', () => {
+            clearInterval(jitterInterval);
+            heroTitle.style.transform = 'none';
+          }, { once: true });
+        });
+      }
+
+      // Hero subtitle intense jitter on hover
+      const heroSubtitle = $('#hero p.muted');
+      if (heroSubtitle) {
+        heroSubtitle.addEventListener('mouseenter', () => {
+          const jitterInterval = setInterval(() => {
+            const randomX = (Math.random() - 0.5) * 5;
+            const randomY = (Math.random() - 0.5) * 5;
+            const randomRotate = (Math.random() - 0.5) * 6;
+            
+            heroSubtitle.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+          }, 80);
+
+          heroSubtitle.addEventListener('mouseleave', () => {
+            clearInterval(jitterInterval);
+            heroSubtitle.style.transform = 'none';
+          }, { once: true });
+        });
+      }
+
+      // Contact section title intense jitter on hover
+      const contactTitle = $('#contact h2');
+      if (contactTitle) {
+        contactTitle.addEventListener('mouseenter', () => {
+          const jitterInterval = setInterval(() => {
+            const randomX = (Math.random() - 0.5) * 6;
+            const randomY = (Math.random() - 0.5) * 6;
+            const randomRotate = (Math.random() - 0.5) * 8;
+            
+            contactTitle.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+          }, 80);
+
+          contactTitle.addEventListener('mouseleave', () => {
+            clearInterval(jitterInterval);
+            contactTitle.style.transform = 'none';
+          }, { once: true });
+        });
+      }
+
+      // Countdown cards intense jitter on hover
+      const countdownCards = $$('#countdown .pixel-card');
+      countdownCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          const jitterInterval = setInterval(() => {
+            const randomX = (Math.random() - 0.5) * 6;
+            const randomY = (Math.random() - 0.5) * 6;
+            const randomRotate = (Math.random() - 0.5) * 8;
+            
+            card.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg) scale(1.1)`;
+          }, 80);
+
+          card.addEventListener('mouseleave', () => {
+            clearInterval(jitterInterval);
+            card.style.transform = 'scale(1)';
+          }, { once: true });
+        });
+      });
+
+      // Countdown text intense jitter on hover
+      const countdownText = $$('#countdown .v, #countdown .l');
+      countdownText.forEach(text => {
+        text.addEventListener('mouseenter', () => {
+          const jitterInterval = setInterval(() => {
+            const randomX = (Math.random() - 0.5) * 4;
+            const randomY = (Math.random() - 0.5) * 4;
+            const randomRotate = (Math.random() - 0.5) * 6;
+            
+            text.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+          }, 80);
+
+          text.addEventListener('mouseleave', () => {
+            clearInterval(jitterInterval);
+            text.style.transform = 'none';
+          }, { once: true });
+        });
+      });
+
+      // Footer text - continuous jitter like dog image and party button
+      const footerText = $('footer .pixel-card');
+      if (footerText) {
+        // Continuous subtle jitter (always running)
+        setInterval(() => {
+          const randomX = (Math.random() - 0.5) * 4;
+          const randomY = (Math.random() - 0.5) * 4;
+          const randomRotate = (Math.random() - 0.5) * 2;
+          
+          footerText.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+        }, 250);
+
+        // Enhanced jitter on hover
+        footerText.addEventListener('mouseenter', () => {
+          const hoverInterval = setInterval(() => {
+            const randomX = (Math.random() - 0.5) * 6;
+            const randomY = (Math.random() - 0.5) * 6;
+            const randomRotate = (Math.random() - 0.5) * 4;
+            
+            footerText.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg) scale(1.05)`;
+          }, 100);
+
+          footerText.addEventListener('mouseleave', () => {
+            clearInterval(hoverInterval);
+            footerText.style.transform = 'scale(1)';
+          }, { once: true });
+        });
+      }
+
+      // Easter egg button - continuous jitter like dog image
+      const easterEggBtn = $('#eggBtn');
+      if (easterEggBtn) {
+        // Continuous subtle jitter (always running)
+        setInterval(() => {
+          const randomX = (Math.random() - 0.5) * 2;
+          const randomY = (Math.random() - 0.5) * 2;
+          const randomRotate = (Math.random() - 0.5) * 1;
+          
+          easterEggBtn.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+        }, 300);
+
+        // Enhanced jitter on hover (like dog image)
+        easterEggBtn.addEventListener('mouseenter', () => {
+          const hoverInterval = setInterval(() => {
+            const randomX = (Math.random() - 0.5) * 6;
+            const randomY = (Math.random() - 0.5) * 6;
+            const randomRotate = (Math.random() - 0.5) * 4;
+            
+            easterEggBtn.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg) scale(1.05)`;
+          }, 100);
+
+          easterEggBtn.addEventListener('mouseleave', () => {
+            clearInterval(hoverInterval);
+            easterEggBtn.style.transform = 'scale(1)';
+          }, { once: true });
+        });
+      }
+    }
+
+    // Initialize animations when DOM is ready
+    function initializeWhenReady() {
+      if (typeof anime !== 'undefined') {
+        setTimeout(initAnimations, 100);
+        setTimeout(initInteractiveEffects, 500);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeWhenReady);
+    } else {
+      initializeWhenReady();
+    }
 
     // Force light theme
     document.documentElement.setAttribute('data-theme', 'light');
